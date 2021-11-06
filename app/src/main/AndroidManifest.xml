@@ -26,9 +26,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".D6SettingsActivity"
-            android:exported="true" />
-        <activity
             android:name=".Settings"
             android:label="Settings"
             android:windowSoftInputMode="stateHidden" />

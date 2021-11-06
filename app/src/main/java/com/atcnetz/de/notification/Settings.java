@@ -19,11 +19,7 @@ public class Settings extends Activity {
     private LocalBroadcastManager localBroadcastManager;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-    //EditText CustomBLEcmd;
     int VibrationIntens = 0;
-    int NotificationMode = 0;
-    //int DisplayMode = 0;
-    //int MovementDisplay = 0;
     int ContrastDisplay = 0;
 
     @Override
@@ -32,32 +28,7 @@ public class Settings extends Activity {
         setContentView(R.layout.activity_settings);
         prefs = getSharedPreferences("Settings", MODE_PRIVATE);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
-        /*CustomBLEcmd = findViewById(R.id.editText);
-        Button button = findViewById(R.id.sendCMDbuttonID);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd(CustomBLEcmd.getText().toString());
-            }
-        });
 
-         */
-
-        Button set_filter_button = findViewById(R.id.set_filter);
-        set_filter_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                    Intent intent = new Intent(Settings.this, app_filter.class);
-                    startActivity(intent);
-            }
-        });
-
-        Button alarm_button = findViewById(R.id.alarmSettingsButtonID);
-        alarm_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                    Intent intent = new Intent(Settings.this, D6SettingsActivity.class);
-                    startActivityForResult(intent, 34);
-
-            }
-        });
 
         Button http_settings_button = findViewById(R.id.logAPISettingsButtonID);
         http_settings_button.setOnClickListener(new View.OnClickListener() {
@@ -78,19 +49,9 @@ public class Settings extends Activity {
         });
 
 
-
-
-
-
-
-
         initBattandFW();
         initVibration();
         initContrast();
-        //initMovementDisplay();
-        //initDisplayMode();
-        initNotifiContent();
-
         initDoNotDisturb();
 
     }
@@ -186,122 +147,6 @@ public class Settings extends Activity {
 
     }
 
-/*
-    void initMovementDisplay() {
-
-        MovementDisplay = prefs.getInt("DisplayMovement", 0);
-
-        RadioButton Radiobutton1 = findViewById(R.id.MovementOff);
-        Radiobutton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd("AT+HANDSUP=0");
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("DisplayMovement", 0);
-                editor.apply();
-            }
-        });
-        RadioButton Radiobutton2 = findViewById(R.id.MovementOn);
-        Radiobutton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd("AT+HANDSUP=2");
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("DisplayMovement", 2);
-                editor.apply();
-            }
-        });
-
-        if (MovementDisplay == 0)
-            Radiobutton1.setChecked(true);
-        else Radiobutton2.setChecked(true);
-
-    }
-
-    void initDisplayMode() {
-
-        DisplayMode = prefs.getInt("DisplayMode", 0);
-
-        RadioButton Radiobutton1 = findViewById(R.id.vibration11);
-        Radiobutton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd("AT+DISMOD=1");
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("DisplayMode", 0);
-                editor.apply();
-            }
-        });
-        RadioButton Radiobutton2 = findViewById(R.id.vibration12);
-        Radiobutton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd("AT+DISMOD=2");
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("DisplayMode", 1);
-                editor.apply();
-            }
-        });
-        RadioButton Radiobutton3 = findViewById(R.id.vibration13);
-        Radiobutton3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd("AT+DISMOD=3");
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("DisplayMode", 2);
-                editor.apply();
-            }
-        });
-
-        if (DisplayMode == 0)
-            Radiobutton1.setChecked(true);
-        else if (DisplayMode == 1)
-            Radiobutton2.setChecked(true);
-        else Radiobutton3.setChecked(true);
-
-    }
-*/
-    void initNotifiContent() {
-
-        NotificationMode = prefs.getInt("NotificationMode", 0);
-
-        RadioButton Radiobutton1 = findViewById(R.id.notification1);
-        Radiobutton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("NotificationMode", 0);
-                editor.apply();
-            }
-        });
-        RadioButton Radiobutton2 = findViewById(R.id.notification2);
-        Radiobutton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("NotificationMode", 1);
-                editor.apply();
-            }
-        });
-        RadioButton Radiobutton3 = findViewById(R.id.notification3);
-        Radiobutton3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("NotificationMode", 2);
-                editor.apply();
-            }
-        });
-        RadioButton Radiobutton4 = findViewById(R.id.notification4);
-        Radiobutton4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putInt("NotificationMode", 3);
-                editor.apply();
-            }
-        });
-
-        if (NotificationMode == 0)
-            Radiobutton1.setChecked(true);
-        else if (NotificationMode == 1)
-            Radiobutton2.setChecked(true);
-        else if (NotificationMode == 2)
-            Radiobutton3.setChecked(true);
-        else Radiobutton4.setChecked(true);
-
-    }
 
     void initDoNotDisturb() {
         final EditText notDistStartH = findViewById(R.id.notDistStartH);

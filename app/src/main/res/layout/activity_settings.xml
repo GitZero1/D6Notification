@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/d6SettingsCardID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -56,73 +55,6 @@
             android:layout_height="3dp"
             android:background="@color/colorAccent" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/contentSelectCardID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:elevation="10dp"
-            app:contentPadding="5dp"
-            app:strokeColor="#000000"
-            app:strokeWidth="2dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/notifisetting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Home Screen Notification Content: "
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/notifisetting">
-
-                    <RadioButton
-                        android:id="@+id/notification1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Title" />
-
-                    <RadioButton
-                        android:id="@+id/notification2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tickertext" />
-
-                    <RadioButton
-                        android:id="@+id/notification3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Text" />
-
-                    <RadioButton
-                        android:id="@+id/notification4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Appname" />
-                </RadioGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
         <LinearLayout
             android:id="@+id/AppSelectRowID"
             android:layout_width="match_parent"
@@ -138,14 +70,6 @@
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
                 android:text="Select App's"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/set_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#000000"
-                android:text="Filter"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
@@ -397,52 +321,6 @@
 
 
     </LinearLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/d6SettingsCardID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="10dp"
-        app:contentPadding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="#000000"
-        app:strokeWidth="2dp">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Some DS-D6 Specific Settings:"
-                android:textSize="17sp"
-                android:layout_gravity="center" />
-
-            <Button
-                android:id="@+id/alarmSettingsButtonID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#000000"
-                android:text="DS-D6 Settings + Alarm"
-                android:textColor="#FFFFFF" />
-
-        </LinearLayout>
-
-
-
-
-    </com.google.android.material.card.MaterialCardView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

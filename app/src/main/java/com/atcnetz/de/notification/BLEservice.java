@@ -195,9 +195,9 @@ public class BLEservice extends Service {
                                 sleep(30);
                                 addCMD("AT+HRTR");
                                 sleep(30);
-                                addCMD("AT+FINDPHONE=1");
+                                addCMD("AT+FINDPHONE=1"); //TODO check if needed
                                 sleep(30);
-                                addCMD("AT+HANDSUP=" + prefs.getInt("DisplayMovement", 0));
+                                addCMD("AT+HANDSUP=" + prefs.getInt("DisplayMovement", 0)); //TODO check if needed
                                 sleep(30);
                                 String date = getCurrentDateTime();
                                 postToastMessageLog("Sending Date: " + date);
@@ -384,9 +384,9 @@ public class BLEservice extends Service {
                 } else {
                     //reconnectBLE();
                 }
-                handler.postDelayed(this, 60 * 1000);
+                handler.postDelayed(this,  60 * 1000);
             }
-        }, 60 * 1000);
+        }, 10 * 60 * 1000);
 
         createNotificationChannel();
         startForeground(1337, getNotifi("Started please connect to Watch"));
