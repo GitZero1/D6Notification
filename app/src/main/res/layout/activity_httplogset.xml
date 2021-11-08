@@ -38,14 +38,15 @@
                         android:id="@+id/http_enable"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Enable" />
+                        android:text="@string/enable" />
 
                     <RadioButton
                         android:id="@+id/http_disable"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="Disable" />
+                        android:text="Disable"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -95,7 +96,8 @@
                     android:id="@+id/http_url_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="http://google.com?testcmd=" />
+                    android:text="HTTP://192.168.1.7/"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
 
@@ -111,7 +113,8 @@
                     android:id="@+id/http_test_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="12345" />
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 <Button
                     android:id="@+id/http_test"
                     android:layout_width="wrap_content"
@@ -125,11 +128,11 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/vibratio56hhu5nIntesity"
+                android:id="@+id/httpExplinationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="With this function you can send http get requests directly via the Smartwatch, just send an AT+HTTP=**HERE_COMMAND** and it will be requested by the phone, if you enable it the answer can also be send back to the Smartwatch" />
+                android:text="@string/HTTPExplinationText" />
             <View
                 android:id="@+id/divider3636"
                 android:layout_width="match_parent"
@@ -182,7 +185,8 @@
                     android:id="@+id/logname_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="d6_log.txt" />
+                    android:text="d6_log.txt"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
 
@@ -198,6 +202,7 @@
                     android:id="@+id/log_test_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:text="12345" />
                 <Button
                     android:id="@+id/log_test"
@@ -212,11 +217,11 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/vibra678tio565nIntesity"
+                android:id="@+id/logExplinationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="This function enables you to save logs on the Smartphone storage, just send an AT+LOG=**LOG_MSG_HERE** from the firmware and it will be saved with a time stamp to the txt file you can name here" />
+                android:text="@string/LoggerExplinationText" />
 
             <View
                 android:id="@+id/divider745"
@@ -225,34 +230,6 @@
                 android:background="@color/colorAccent" />
 
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="AT+PUSH=0,1234567890,0,1" />
-
-                <Button
-                    android:id="@+id/sendCMDbuttonID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Custom BLe CMD" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/vibrhohatio565nIntesity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="This function simply lets you test different cmd's send to the Smartwatch" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

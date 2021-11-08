@@ -62,9 +62,9 @@ public class Settings extends Activity {
         String FirmwareVersion = prefs.getString("FirmwareVersion", "not loaded");
 
         TextView textView = findViewById(R.id.Battery);
-        textView.setText("Battery of D6: " + BatteryPercent + "%");
+        textView.setText("Battery: " + BatteryPercent + "%");
         TextView textView1 = findViewById(R.id.Version);
-        textView1.setText("Firmware on D6: " + FirmwareVersion);
+        textView1.setText("Firmware: " + FirmwareVersion);
     }
 
     void initVibration() {

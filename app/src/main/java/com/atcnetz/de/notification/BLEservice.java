@@ -255,10 +255,6 @@ public class BLEservice extends Service {
                     e.printStackTrace();
                 }
                 String bleText = "";
-                if(appName == null) appName = "MissingNo.";
-                if(Title == null) Title = "Empty";
-                if(Text == null) Text = "Empty";
-                if(tickerText == null) tickerText = "Empty";
 
                 switch (prefs.getInt("NotificationMode", 0)) {
                     case 0:
@@ -445,33 +441,28 @@ public class BLEservice extends Service {
         if (response.length() >= 5) {
             setLastReceiveTime();
             setNotify();
-            if (isInCMD(response, "AT+VER")) {
+            if (isInCMD(response, "AT+VER")) { //FIRMWARE VERSION
                 SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
                 editor.putString("FirmwareVersion", response.substring(7));
                 editor.apply();
-                postToastMessage("D6 Firmware Version: " + response.substring(7));
-            } else if (isInCMD(response, "AB+VER")) {
-                SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                editor.putString("BTFirmwareVersion", response.substring(7));
-                editor.apply();
-                postToastMessage("D6 Bootloader Version: " + response.substring(7));
-            } else if (isInCMD(response, "AT+BATT")) {
+                postToastMessage("Firmware Version: " + response.substring(7));
+            } else if (isInCMD(response, "AT+BATT")) { // BATTERY
                 hasSend = true;
                 SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
                 editor.putString("BatteryPercent", response.substring(8));
                 editor.apply();
                 postToastMessage("Battery: " + response.substring(8) + "%");
-            } else if (isInCMD(response, "AT+PACE")) {
+            } else if (isInCMD(response, "AT+PACE")) { //STEPS
                 SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
                 editor.putString("Steps", response.substring(8));
                 editor.apply();
                 postToastMessage("Steps: " + response.substring(8));
-            } else if (isInCMD(response, "AT+BEEP")) {
+            } else if (isInCMD(response, "AT+BEEP")) { //FIND PHONE
                 v.vibrate(400);
                 postToastMessage("You Make me go Bzzzzz");
-            } else if (isInCMD(response, "AT+DT")) {
+            } else if (isInCMD(response, "AT+DT")) { // DATE WAS SET
                 postToastMessage("Setting Date successful");
-            } else if (isInCMD(response, "AT+HTTP")) {
+            } else if (isInCMD(response, "AT+HTTP")) { //HTTP CMD RECEIVED
                 postToastMessage("Got HTTP cmd...");
                 if (prefs.getBoolean("http_enable", false)) {
                     String req_cmd = prefs.getString("http_url_edit", "https://google.com?testcmd=") + response.substring(8);
@@ -485,7 +476,7 @@ public class BLEservice extends Service {
                 } else {
                     postToastMessage("HTTP requests not enabled");
                 }
-            } else if (isInCMD(response, "AT+LOG")) {
+            } else if (isInCMD(response, "AT+LOG")) {  //LOGGING
                 postToastMessage("Got LOG cmd...");
                 if (prefs.getBoolean("savelog_enable", false)) {
                     String log_cmd = response.substring(7);
@@ -494,11 +485,11 @@ public class BLEservice extends Service {
                 } else {
                     postToastMessage("Logging not enabled");
                 }
-            } else if (isInCMD(response, "AT+HRTR")) {
+            } else if (isInCMD(response, "AT+HRTR")) {  //HEARTRATE
                 SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
                 editor.putString("HeartRate", response.substring(8));
                 editor.apply();
-                postToastMessage("HeartRateTest: " + response.substring(8));
+                postToastMessage("HeartRate: " + response.substring(8));
             }
         }
     }

@@ -2,10 +2,9 @@
     <string name="ble_not_supported">BLE not supported on this device</string>
     <string name="bt_unavailable">Bluetooth unavailable</string>
     <string name="bt_disabled">Bluetooth disabled, turn on and restart</string>
-    <string name="welcome">\nPlease wait a moment and then select your D6 Fitness Tracker.\n</string>
-    <string name="open_privacy_policy">View our <a href="https://atcnetz.de/privacy_policy.html">Privacy Policy</a> here.</string>
+    <string name="welcome">\nPlease wait a moment and then select your Watch.\n</string>
 
-    <string name="welcome_Text">Welcome to the D6 Notification App</string>
+    <string name="welcome_Text">Zerones Notification App</string>
     <string name="notification_checkbox_text">Notification\'s</string>
     <string name="log_msg_checkbox">Log MSG\'s</string>
     <string name="devName_text">Name: No Device</string>
@@ -20,6 +19,9 @@
     <string name="steps_icon_description">Steps Icon Description</string>
     <string name="deviceimage_description">deviceImage Description</string>
     <string name="editTextHint">Custom Command EditText</string>
-    <string name="CustomCommandText">AT+PUSH=0,1234567890,0,1</string>
+    <string name="CustomCommandText">AT+PUSH=0,TestCmd,0,1</string>
     <string name="customCmdButtonText">Custom\nCMD</string>
+    <string name="enable">Enable</string>
+    <string name="LoggerExplinationText">This function enables you to save logs on the Smartphone storage, just send an AT+LOG=**LOG_MSG_HERE** from the firmware and it will be saved with a time stamp to the txt file you can name here</string>
+    <string name="HTTPExplinationText">With this function you can send http get requests directly via the Smartwatch, just send an AT+HTTP=**HERE_COMMAND** and it will be requested by the phone, if you enable it the answer can also be send back to the Smartwatch</string>
 </resources>

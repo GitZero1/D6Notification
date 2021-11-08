@@ -3,7 +3,6 @@ package com.atcnetz.de.notification;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -38,7 +37,6 @@ public class httplogset extends Activity {
         prefs = getSharedPreferences("Settings", MODE_PRIVATE);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
 
-        init_custom_cmd();
         init_http();
         init_log();
     }
@@ -59,8 +57,8 @@ public class httplogset extends Activity {
 
         http_enable.setChecked(prefs.getBoolean("http_enable", false));
         http_answer_enable.setChecked(prefs.getBoolean("http_answer_enable", false));
-        http_url_edit.setText(prefs.getString("http_url_edit", "https://google.com?testcmd="));
-        http_test_edit.setText(prefs.getString("http_test_edit", "12345"));
+        http_url_edit.setText(prefs.getString("http_url_edit", "http://192.168.1.7/"));
+        http_test_edit.setText(prefs.getString("http_test_edit", ""));
 
         http_test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -116,17 +114,7 @@ public class httplogset extends Activity {
         });
     }
 
-    EditText CustomBLEcmd;
 
-    void init_custom_cmd() {
-        CustomBLEcmd = findViewById(R.id.editText);
-        Button button = findViewById(R.id.sendCMDbuttonID);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sendBLEcmd(CustomBLEcmd.getText().toString());
-            }
-        });
-    }
 
     @Override
     protected void onStart() {
@@ -138,13 +126,6 @@ public class httplogset extends Activity {
         super.onStop();
     }
 
-
-    public void sendBLEcmd(String message) {
-        Intent intent = new Intent("MSGtoServiceIntentBLEcmd");
-        if (message != null)
-            intent.putExtra("MSGtoService", message);
-        localBroadcastManager.sendBroadcast(intent);
-    }
 
     public void request_perms() {
         int writeExternalStoragePermission = ContextCompat.checkSelfPermission(httplogset.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);

@@ -16,7 +16,7 @@
         android:gravity="center"
         android:text="@string/welcome_Text"
 
-        android:textSize="18sp" />
+        android:textSize="28sp" />
 
     <LinearLayout
         android:id="@+id/checkboxRowID"
@@ -40,15 +40,6 @@
             android:layout_marginStart="10dp"
             android:text="@string/log_msg_checkbox"
             tools:ignore="TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/privacyPolicytextViewID"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/open_privacy_policy"
-            android:textAlignment="center"
-            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -138,7 +129,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:contentDescription="@string/deviceimage_description"
-                android:src="@drawable/nodeviceimage"
+                android:src="@drawable/noimage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -92,8 +92,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //Textviews
         tvContent = (TextView) findViewById(R.id.tv_content);
         scrollview = (ScrollView) findViewById(R.id.scroll);
-        tvPolicy = findViewById(R.id.privacyPolicytextViewID);
-        tvPolicy.setMovementMethod(LinkMovementMethod.getInstance()); //setup hyperlink
         //Buttons
         SettingsButton = findViewById(R.id.SettingsButtonID);
         SettingsButton.setOnClickListener(this);
@@ -248,9 +246,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public void load() {
-        tvContent.setText("Please Long click on Device Image to select your device, you need to accept Location services to enable Bluetooth acces to this app.\r\n" +
-                "\r\nYou can Enable or Disable the notification for certain app's via the Select App's Button in settings (Click cog icon for settings).\r\n" +
-                "\r\nHave fun with this App and give me feedback if you found a bug :)\r\n\r\nSpecial thanks the following people for contributions:\r\nNeil O'Brien\r\n");
+        tvContent.setText("Hello, Friend.");
         FileInputStream fis = null;
         updateWatchInfo();
         try {
