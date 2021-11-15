@@ -21,11 +21,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Vibrator;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -195,10 +197,6 @@ public class BLEservice extends Service {
                                 sleep(30);
                                 addCMD("AT+HRTR");
                                 sleep(30);
-                                addCMD("AT+FINDPHONE=1"); //TODO check if needed
-                                sleep(30);
-                                addCMD("AT+HANDSUP=" + prefs.getInt("DisplayMovement", 0)); //TODO check if needed
-                                sleep(30);
                                 String date = getCurrentDateTime();
                                 postToastMessageLog("Sending Date: " + date);
                                 addCMD("AT+DT=" + date);
@@ -253,36 +251,20 @@ public class BLEservice extends Service {
                     appName = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(PackageName, PackageManager.GET_META_DATA));
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
+                    Log.d("THIS IS:", PackageName);
+                    if (PackageName.equals("com.discord")) {appName = "Discord";}
                 }
+
                 String bleText = "";
-
-                switch (prefs.getInt("NotificationMode", 0)) {
-                    case 0:
-                    default:
-                        if (Title != null) bleText = Title;
-                        break;
-                    case 1:
-                        if (tickerText != null) bleText = tickerText;
-                        break;
-                    case 2:
-                        if (Text != null) bleText = Text;
-                        break;
-                    case 3:
-                        if (appName != null) bleText = appName;
-                        break;
-                }
-
+                if (appName != null) bleText = appName;
                 if (bleText.equals("")) bleText = "Notification";
                 if (bleText.length() >= 200) bleText = bleText.substring(0, 200);
 
                 String disableApps = prefs.getString("enabledApps", "");
                 String[] items = disableApps.split(";");
-                System.out.println(bleText);
-                //bleText = bleText.replaceAll("[^a-zA-Z0-9ÄÜÖäöü :;_%&()!?ß+*/]", ".");
                 bleText = bleText.replaceAll(",", ".");
-                System.out.println(bleText);
-                if (Arrays.asList(items).contains(PackageName) && prefs.getBoolean("isNotificationEnabled", true)) {
-                    postToastMessage("NotifyService:\r\nTitle: " + Title + "\r\nTickertext: " + tickerText + "\r\nText: " + Text + "\r\nAppname: " + appName + "\r\nID:" + IDnr);
+                if (Arrays.asList(items).contains(PackageName) && prefs.getBoolean("isNotificationEnabled", true) || PackageName.equals("com.discord") && prefs.getBoolean("isNotificationEnabled", true)) {
+                    postToastMessage("NotifyService:" + "\r\nAppname: " + appName + "\r\nID:" + IDnr + "\r\nTitle: " + Title + "\r\nTickertext: " + tickerText + "\r\nText: " + Text );
 
                     if (isDisturbing()) {
                         lastTime = System.currentTimeMillis();
@@ -460,6 +442,7 @@ public class BLEservice extends Service {
             } else if (isInCMD(response, "AT+BEEP")) { //FIND PHONE
                 v.vibrate(400);
                 postToastMessage("You Make me go Bzzzzz");
+                mediaplayer();
             } else if (isInCMD(response, "AT+DT")) { // DATE WAS SET
                 postToastMessage("Setting Date successful");
             } else if (isInCMD(response, "AT+HTTP")) { //HTTP CMD RECEIVED
@@ -707,6 +690,17 @@ public class BLEservice extends Service {
             postToastMessage("Not Connected, please check that.");
             //reconnectBLE();
         }
+    }
+
+    void mediaplayer(){
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.hereboy);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mp.release();
+            }
+        });
+        mp.start();
     }
 
     public void writeCharacteristic(byte[] data) {

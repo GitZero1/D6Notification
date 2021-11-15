@@ -53,6 +53,7 @@ public class Settings extends Activity {
         initVibration();
         initContrast();
         initDoNotDisturb();
+        initTestButtons();
 
     }
 
@@ -178,6 +179,31 @@ public class Settings extends Activity {
         }});
     }
 
+    void initTestButtons(){
+        Button pwrBtn = findViewById(R.id.OffButtonID);
+        pwrBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendBLEcmd("BT+OFF");
+            }
+        });
+
+        Button rstBtn = findViewById(R.id.rebootButtonId);
+        rstBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendBLEcmd("BT+RESET");
+            }
+        });
+
+        Button bootldrBtn = findViewById(R.id.BootLoadButtonID);
+        bootldrBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendBLEcmd("BT+UPGB");
+            }
+        });
+    }
 
     @Override
     protected void onStart() {
