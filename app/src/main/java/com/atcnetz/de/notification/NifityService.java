@@ -20,6 +20,7 @@ public class NifityService extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
         SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
         if (sbn.getPackageName().equals("com.android.systemui")) { return;}
+        if (sbn.getPackageName().equals("com.atcnetz.de.notification")) {return;}
         Log.i(TAG, "ID:" + sbn.getId());
         Log.i(TAG, "Posted by:" + sbn.getPackageName());
         Log.i(TAG, "tickerText:" + sbn.getNotification().tickerText);

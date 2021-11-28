@@ -253,6 +253,8 @@ public class BLEservice extends Service {
                     e.printStackTrace();
                     Log.d("THIS IS:", PackageName);
                     if (PackageName.equals("com.discord")) {appName = "Discord";}
+                    if (PackageName.equals("com.google.android.gm")) {appName = "Gmail";}
+                    if (PackageName.equals("ch.protonmail.android")) {appName = "Proton Mail";}
                 }
 
                 String bleText = "";
@@ -263,37 +265,38 @@ public class BLEservice extends Service {
                 String disableApps = prefs.getString("enabledApps", "");
                 String[] items = disableApps.split(";");
                 bleText = bleText.replaceAll(",", ".");
-                if (Arrays.asList(items).contains(PackageName) && prefs.getBoolean("isNotificationEnabled", true) || PackageName.equals("com.discord") && prefs.getBoolean("isNotificationEnabled", true)) {
-                    postToastMessage("NotifyService:" + "\r\nAppname: " + appName + "\r\nID:" + IDnr + "\r\nTitle: " + Title + "\r\nTickertext: " + tickerText + "\r\nText: " + Text );
+                if (prefs.getBoolean("isNotificationEnabled", true)){
+                    if((Arrays.asList(items).contains(PackageName)))/*|| PackageName.equals("com.discord") || PackageName.equals("ch.protonmail.android") || PackageName.equals("com.google.android.gm"))*/{
+                        postToastMessage("NotifyService:" + "\r\nAppname: " + appName + "\r\nID:" + IDnr + "\r\nTitle: " + Title + "\r\nTickertext: " + tickerText + "\r\nText: " + Text );
 
-                    if (isDisturbing()) {
-                        lastTime = System.currentTimeMillis();
-                        postToastMessage("Do not disturb is Active");
-                    } else {
-                        if (isConnected) {
-                            if (System.currentTimeMillis() - lastTime > 1000) {
-                                lastTime = System.currentTimeMillis();
-                                try {
-                                    addCMD("AT+PUSH=0," + bleText + ",0");
-
-                                    sleep(30);
-                                    addCMD("AT+NAME=" + appName);
-                                    sleep(30);
-                                    addCMD("AT+TITL=" + Title);
-                                    sleep(30);
-                                    addCMD("AT+TICK=" + tickerText);
-                                    sleep(30);
-                                    addCMD("AT+BODY=" + Text);
-                                }catch (InterruptedException e) {
-                                    e.printStackTrace();
+                        if (isDisturbing()) {
+                            lastTime = System.currentTimeMillis();
+                            postToastMessage("Do not disturb is Active");
+                        } else {
+                            if (isConnected) {
+                                if (System.currentTimeMillis() - lastTime > 1000) {
+                                    lastTime = System.currentTimeMillis();
+                                    try {
+                                        addCMD("AT+PUSH=0," + bleText + ",0");
+                                        sleep(30);
+                                        addCMD("AT+NAME=" + appName);
+                                        sleep(30);
+                                        addCMD("AT+TITL=" + Title);
+                                        sleep(30);
+                                        addCMD("AT+TICK=" + tickerText);
+                                        sleep(30);
+                                        addCMD("AT+BODY=" + Text);
+                                    }catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    postToastMessageLog("will not send now because timout not reached for new message");
                                 }
                             } else {
-                                postToastMessageLog("will not send now because timout not reached for new message");
+                                savedBleText = bleText;
+                                postToastMessageLog("Not Connected will send notifi later");
+                                //reconnectBLE();
                             }
-                        } else {
-                            savedBleText = bleText;
-                            postToastMessageLog("Not Connected will send notifi later");
-                            //reconnectBLE();
                         }
                     }
                 }
